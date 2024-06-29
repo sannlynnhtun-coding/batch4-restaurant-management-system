@@ -22,5 +22,36 @@ namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Category
             var result = _daCategory.CreateCategory(category);
             return result;
         }
+
+        public List<CategoryModel> GetAllCategories()
+        {
+            return _daCategory.GetAllCategories();
+        }
+
+        public CategoryModel GetCategoryById(int id)
+        {
+            var category = _daCategory.GetCategoryById(id);
+            if (category == null) throw new InvalidDataException("no data found");
+            return category;
+        }
+
+        public CategoryModel GetCategoryByCode(string code)
+        {
+            var category = _daCategory.GetCategoryByCode(code);
+            if (category == null) throw new InvalidDataException("no data found");
+            return category;
+        }
+
+        public int UpdateCategory(string code,  CategoryModel category)
+        {
+            var result = _daCategory.UpdateCategory(code, category);
+            return result;
+        }
+
+        public int DeleteCategory(string code)
+        {
+            return _daCategory.DeleteCategory(code);
+        }
     }
+
 }
