@@ -2,6 +2,7 @@
 using Batch4.Api.RestaurantManagementSystem.DA;
 using Batch4.Api.RestaurantManagementSystem.DA.Db;
 using Batch4.Api.RestaurantManagementSystem.DA.Services.Category;
+using Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
 
 namespace Batch4.Api.RestaurantManagementSystem
 {
@@ -17,12 +18,14 @@ namespace Batch4.Api.RestaurantManagementSystem
         public static IServiceCollection AddDataAccessServices(this IServiceCollection services)
         {
             services.AddScoped<DA_Category>();
+            services.AddScoped<DA_MenuItem>();
             return services;
         }
 
         public static IServiceCollection AddBusinessLogicServices(this IServiceCollection services)
         {
             services.AddScoped<BL_Category>();
+            services.AddScoped<DA_MenuItem>();
             return services;
         }
 
