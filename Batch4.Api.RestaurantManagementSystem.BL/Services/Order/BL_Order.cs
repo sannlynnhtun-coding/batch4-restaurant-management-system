@@ -19,5 +19,10 @@ namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Order
             return model;
         }
 
+        public async Task<OrderDetailResponseModel> ViewOrder(string invoiceNo)
+        {
+            var model = await _daOrder.ViewOrder(invoiceNo);
+            return model;
+        }
     }
 }

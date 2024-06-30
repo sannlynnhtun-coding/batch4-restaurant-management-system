@@ -1,5 +1,7 @@
-﻿using Batch4.Api.RestaurantManagementSystem.DA.Db;
+﻿using Batch4.Api.RestaurantManagementSystem.DA.Dapper;
+using Batch4.Api.RestaurantManagementSystem.DA.Db;
 using Batch4.Api.RestaurantManagementSystem.DA.Models;
+using Batch4.Api.RestaurantManagementSystem.DA.Querys;
 using Batch4.Api.RestaurantManagementSystem.DA.ResponseModel;
 using Microsoft.EntityFrameworkCore;
 namespace Batch4.Api.RestaurantManagementSystem.DA.Services.Order
@@ -7,10 +9,12 @@ namespace Batch4.Api.RestaurantManagementSystem.DA.Services.Order
     public class DA_Order
     {
         private readonly AppDbContext _db;
+        private readonly DapperService _dapper;
 
-        public DA_Order(AppDbContext db)
+        public DA_Order(AppDbContext db,DapperService dapper)
         {
             _db = db;
+            _dapper = dapper;
         }
 
         public async Task<OrderResponseModel> CreateOrder(OrderRequest orderRequest)
@@ -50,6 +54,19 @@ namespace Batch4.Api.RestaurantManagementSystem.DA.Services.Order
                 model.InvoiceNo = invoiceNo;
                 model.TotalPrice = totalPrice;
             }
+            return model;
+        }
+
+        public async Task<OrderDetailResponseModel> ViewOrder(string invoiceNo)
+        {
+            OrderDetailResponseModel model = new OrderDetailResponseModel();    
+            var order = await _db.Orders.FirstOrDefaultAsync(x=>x.InvoiceNo == invoiceNo);
+            if(order == null) return model;
+            model.InvoiceNo = order.InvoiceNo;
+            model.TotalPrice = order.TotalPrice;
+
+            var orderDetail = _dapper.Query<OrderItemDetailModel>(OrderQuery.OrderDetailQuery, new { InvoiceNo = invoiceNo });
+            model.Items = orderDetail;
             return model;
         }
     }

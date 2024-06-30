@@ -16,9 +16,7 @@ namespace Batch4.Api.RestaurantManagementSystem.DA.Db
 
         public DbSet<CategoryModel> Categories { get; set; }
         public DbSet<MenuItemModel> MenuItem { get; set; }
-
         public DbSet<OrderModel> Orders { get; set; }
-
         public DbSet<OrderDetailModel> OrderDetails { get; set; }
 
     }
