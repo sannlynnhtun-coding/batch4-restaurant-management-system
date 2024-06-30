@@ -1,7 +1,6 @@
 ﻿using Batch4.Api.RestaurantManagementSystem.BL.RequestModels;
 using Batch4.Api.RestaurantManagementSystem.BL.Services.Category;
 using Batch4.Api.RestaurantManagementSystem.DA.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Batch4.Api.RestaurantManagementSystem.Controllers.Category
@@ -28,7 +27,6 @@ namespace Batch4.Api.RestaurantManagementSystem.Controllers.Category
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }
@@ -73,7 +71,6 @@ namespace Batch4.Api.RestaurantManagementSystem.Controllers.Category
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }
@@ -105,7 +102,6 @@ namespace Batch4.Api.RestaurantManagementSystem.Controllers.Category
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }
