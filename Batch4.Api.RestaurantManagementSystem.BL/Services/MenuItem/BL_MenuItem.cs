@@ -1,11 +1,5 @@
 ﻿using Batch4.Api.RestaurantManagementSystem.DA.Models;
-using Batch4.Api.RestaurantManagementSystem.DA.Services.Category;
 using Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem
 {
@@ -35,10 +29,15 @@ namespace Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem
             return item;
         }
 
+        public List<MenuItemModel> GetMenuItemsByCategoryCode(string categoryCode)
+        {
+            var lst = _daMenuItem.GetMenuItemByCategoryCode(categoryCode);
+            return lst;
+        }
+
         public int UpdateMenuItem(int id, MenuItemModel menuModel)
         {
             var item = _daMenuItem.UpdateMenuItem(id, menuModel);
-            if (item == null) throw new InvalidDataException("No data found");
             return item;
         }
 

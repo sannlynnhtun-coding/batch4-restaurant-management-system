@@ -31,6 +31,12 @@ namespace Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem
             return item;
         }
 
+        public List<MenuItemModel> GetMenuItemByCategoryCode(string categoryCode)
+        {
+            var lst = _db.MenuItem.Where(x=>x.CategoryCode==categoryCode).ToList();
+            return lst;
+        }
+
         public int UpdateMenuItem(int id,MenuItemModel menuModel)
         {
             MenuItemModel item = GetMenuItemById(id);
