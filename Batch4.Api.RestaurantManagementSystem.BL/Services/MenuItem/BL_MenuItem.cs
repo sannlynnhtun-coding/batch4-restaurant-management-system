@@ -1,4 +1,5 @@
-﻿using Batch4.Api.RestaurantManagementSystem.DA.Models;
+﻿using Batch4.Api.RestaurantManagementSystem.BL.RequestModels;
+using Batch4.Api.RestaurantManagementSystem.DA.Models;
 using Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
 
 namespace Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem
@@ -12,9 +13,11 @@ namespace Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem
             _daMenuItem = daMenuItem;
         }
 
-        public int CreateMenuItem(MenuItemModel menuItem)
+        public int CreateMenuItem(MenuItemRequest menuItem)
         {
-            var result = _daMenuItem.CreateMenuItem(menuItem);
+            if (isExist(menuItem.name)) throw new Exception("Already existed!");
+
+            var result = _daMenuItem.CreateMenuItem(menuItem.Change());
             return result;
         }
 
@@ -35,9 +38,11 @@ namespace Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem
             return lst;
         }
 
-        public int UpdateMenuItem(int id, MenuItemModel menuModel)
+        public int UpdateMenuItem(int id, MenuItemRequest menuModel)
         {
-            var item = _daMenuItem.UpdateMenuItem(id, menuModel);
+            //if (isExist(menuModel.name)) throw new Exception("Already existed!");
+
+            var item = _daMenuItem.UpdateMenuItem(id, menuModel.Change());
             return item;
         }
 
@@ -46,5 +51,11 @@ namespace Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem
             return _daMenuItem.DeleteMenuItem(id);
         }
 
+        private bool isExist(string name)
+        {
+            var item = _daMenuItem.FindByName(name);
+            if(item == null) return false;
+            return true;
+        }
     }
 }

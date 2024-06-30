@@ -76,21 +76,21 @@ namespace Batch4.Api.RestaurantManagementSystem.Controllers.Category
             }
         }
 
-        [HttpPut("{code}")]
-        public IActionResult Update(string code, CategoryRequest category)
-        {
-            try
-            {
-                var result = _blCategory.UpdateCategory(code, category);
-                string message = result > 0 ? "Updated Successful" : "Failed update!";
-                return Ok(message);
-            }
-            catch (Exception e)
-            {
+        //[HttpPut("{code}")]
+        //public IActionResult Update(string code, CategoryRequest category)
+        //{
+        //    try
+        //    {
+        //        var result = _blCategory.UpdateCategory(code, category);
+        //        string message = result > 0 ? "Updated Successful" : "Failed update!";
+        //        return Ok(message);
+        //    }
+        //    catch (Exception e)
+        //    {
 
-                return BadRequest(e.Message);
-            }
-        }
+        //        return BadRequest(e.Message);
+        //    }
+        //}
 
         [HttpDelete("{code}")]
         public IActionResult Delete(string code) 
