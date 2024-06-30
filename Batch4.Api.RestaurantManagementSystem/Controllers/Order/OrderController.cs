@@ -1,6 +1,6 @@
 ﻿using Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem;
 using Batch4.Api.RestaurantManagementSystem.BL.Services.Order;
-using Batch4.Api.RestaurantManagementSystem.DA.Models;
+using Batch4.Api.RestaurantManagementSystem.DA.ResponseModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Batch4.Api.RestaurantManagementSystem.Controllers.Order
@@ -17,11 +17,11 @@ namespace Batch4.Api.RestaurantManagementSystem.Controllers.Order
         }
 
         [HttpPost]
-        public IActionResult Create(OrderRequest orderRequest)
+        public async Task<IActionResult> Create(OrderRequest orderRequest)
         {
-            var result = _blOrder.CreateOrder(orderRequest);
-            string message = result > 0 ? "Order placed successful." : "Order placed Fail.";
-            return Ok(message);
+            var model =await _blOrder.CreateOrder(orderRequest);
+            if (model.InvoiceNo == null) return Ok("Order Creation Fail."); 
+            return Ok(model);
         }
     }
 }

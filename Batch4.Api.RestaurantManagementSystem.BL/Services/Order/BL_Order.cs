@@ -1,6 +1,6 @@
-﻿using Batch4.Api.RestaurantManagementSystem.DA.Models;
-using Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
+﻿using Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
 using Batch4.Api.RestaurantManagementSystem.DA.Services.Order;
+using Batch4.Api.RestaurantManagementSystem.DA.ResponseModel;
 
 namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Order
 {
@@ -13,10 +13,11 @@ namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Order
             _daOrder = daOrder;
         }
 
-        public int CreateOrder(OrderRequest orderRequest)
+        public async Task<OrderResponseModel> CreateOrder(OrderRequest orderRequest)
         {
-            var result = _daOrder.CreateOrder(orderRequest);
-            return result;
+            var model = await _daOrder.CreateOrder(orderRequest);
+            return model;
         }
+
     }
 }
