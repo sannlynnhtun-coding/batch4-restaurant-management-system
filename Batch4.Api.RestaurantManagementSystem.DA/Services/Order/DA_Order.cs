@@ -1,5 +1,7 @@
 ﻿using Batch4.Api.RestaurantManagementSystem.DA.Db;
 using Batch4.Api.RestaurantManagementSystem.DA.Models;
+using Batch4.Api.RestaurantManagementSystem.DA.ResponseModel;
+using Microsoft.EntityFrameworkCore;
 namespace Batch4.Api.RestaurantManagementSystem.DA.Services.Order
 {
     public class DA_Order
@@ -10,37 +12,45 @@ namespace Batch4.Api.RestaurantManagementSystem.DA.Services.Order
         {
             _db = db;
         }
-        public int CreateOrder(OrderRequest orderRequest)
+
+        public async Task<OrderResponseModel> CreateOrder(OrderRequest orderRequest)
         {
+            OrderResponseModel model = new OrderResponseModel();
+            List<OrderDetailModel> orderDetailLst = new List<OrderDetailModel>();
+            decimal totalPrice = 0;
             var invoiceNo = DateTime.Now.ToString("yyyMMddHHmmss");
 
-            List<OrderItemDetailModel> orderDetail = orderRequest.Items.Select(x => new OrderItemDetailModel
+            foreach (var item in orderRequest.Items)
             {
-                ItemId = x.ItemId,
-                ItemName = _db.MenuItem.FirstOrDefault(y => y.ItemId == x.ItemId).ItemName,
-                ItemPrice = (decimal)_db.MenuItem.FirstOrDefault(y => y.ItemId == x.ItemId).ItemPrice,
-                Quantity = x.Quantity
-            }).ToList();
+                OrderDetailModel detailModel = new OrderDetailModel();
+                var menu = await _db.MenuItem.FirstOrDefaultAsync(x => x.ItemId == item.ItemId);
+                if (menu is not null)
+                {
+                    detailModel.ItemId = menu.ItemId;
+                    detailModel.Quantity = item.Quantity;
+                    detailModel.InvoiceNo = invoiceNo;
+                    detailModel.TotalPrice = item.Quantity * menu.ItemPrice;
+                }
+                orderDetailLst.Add(detailModel);
+            }
 
-
+            if (orderDetailLst.Count == 0) return model;
+            totalPrice = orderDetailLst.Sum(x => x.TotalPrice);
             OrderModel order = new OrderModel()
             {
                 InvoiceNo = invoiceNo,
-                TotalPrice = orderDetail.Sum(x => x.Quantity * x.ItemPrice)
+                TotalPrice = totalPrice
             };
 
-            List<OrderDetailModel> orderDetailLst = orderDetail.Select(x => new OrderDetailModel
+            await _db.Orders.AddAsync(order);
+            await _db.OrderDetails.AddRangeAsync(orderDetailLst);
+            int result =await _db.SaveChangesAsync();
+            if (result > 0)
             {
-                InvoiceNo = invoiceNo,
-                ItemId = x.ItemId,
-                Quantity = x.Quantity,
-                TotalPrice = x.ItemPrice * x.Quantity
-            }).ToList();
-
-            _db.OrderDetails.AddRange(orderDetailLst);
-            _db.Orders.Add(order);
-            int result = _db.SaveChanges();
-            return result;
+                model.InvoiceNo = invoiceNo;
+                model.TotalPrice = totalPrice;
+            }
+            return model;
         }
     }
 }
