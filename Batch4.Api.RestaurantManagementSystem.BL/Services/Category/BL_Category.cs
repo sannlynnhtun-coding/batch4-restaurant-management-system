@@ -15,8 +15,7 @@ public class BL_Category
 
     public int CreateCategory(CategoryRequest category)
     {
-        var IsExist = _daCategory.FindByName(category.categoryName);
-        if (IsExist != null) throw new Exception("Already Existed!");
+        if (this.IsExist(category.categoryName)) throw new Exception("Already Existed!");
 
         var result = _daCategory.CreateCategory(category.Change());
         return result;
@@ -40,14 +39,23 @@ public class BL_Category
             return category;
         }
 
-    public int UpdateCategory(string code,  CategoryRequest category)
-    {
-        var result = _daCategory.UpdateCategory(code, category.Change());
-        return result;
-    }
+    //public int UpdateCategory(string code,  CategoryRequest category)
+    //{
+    //   // if (this.IsExist(category.categoryName)) throw new Exception("Already Existed!");
+
+    //    var result = _daCategory.UpdateCategory(code, category.Change());
+    //    return result;
+    //}
 
     public int DeleteCategory(string code)
     {
         return _daCategory.DeleteCategory(code);
+    }
+
+    private bool IsExist(string name)
+    {
+        var Category = _daCategory.FindByName(name);
+        if(Category == null) return false;
+        return true;
     }
 }

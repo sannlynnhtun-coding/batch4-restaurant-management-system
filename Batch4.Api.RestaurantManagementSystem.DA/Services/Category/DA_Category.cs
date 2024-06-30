@@ -44,17 +44,17 @@ public class DA_Category
         return category;
     }
 
-    public int UpdateCategory(string categoryCode,  CategoryModel category)
-    {
-        CategoryModel item = this.GetCategoryByCode(categoryCode);
-        if (item == null) throw new InvalidDataException("no data found");
+    //public int UpdateCategory(string categoryCode,  CategoryModel category)
+    //{
+    //    CategoryModel item = this.GetCategoryByCode(categoryCode);
+    //    if (item == null) throw new InvalidDataException("no data found");
 
-        item.CategoryName = category.CategoryName;
-        item.CategoryCode = category.CategoryCode;
+    //    item.CategoryName = category.CategoryName;
+    //    item.CategoryCode = category.CategoryCode;
 
-        int result = _db.SaveChanges();
-        return result;
-    }
+    //    int result = _db.SaveChanges();
+    //    return result;
+    //}
 
     public int DeleteCategory(string categoryCode)
     {

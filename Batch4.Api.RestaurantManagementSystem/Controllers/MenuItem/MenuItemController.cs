@@ -1,4 +1,5 @@
-﻿using Batch4.Api.RestaurantManagementSystem.BL.Services.Category;
+﻿using Batch4.Api.RestaurantManagementSystem.BL.RequestModels;
+using Batch4.Api.RestaurantManagementSystem.BL.Services.Category;
 using Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem;
 using Batch4.Api.RestaurantManagementSystem.DA.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +20,17 @@ namespace Batch4.Api.RestaurantManagementSystem.Controllers.MenuItem
         }
 
         [HttpPost]
-        public IActionResult Create(MenuItemModel menuItem)
+        public IActionResult Create(MenuItemRequest menuItem)
         {
-            var category = _blCategory.GetCategoryByCode(menuItem.CategoryCode);
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            var category = _blCategory.GetCategoryByCode(menuItem.categoryCode);
             if (category is null) return Ok("Invalid Category.");
 
             var result = _blMenuItem.CreateMenuItem(menuItem);
@@ -32,44 +41,79 @@ namespace Batch4.Api.RestaurantManagementSystem.Controllers.MenuItem
         [HttpGet]
         public IActionResult GetItem()
         {
-            var list = _blMenuItem.GetAllMenuItem();
-            if (list.Count == 0) return Ok("No Menu Item Found");
-            return Ok(list);
+            try
+            {
+                var list = _blMenuItem.GetAllMenuItem();
+                if (list.Count == 0) return Ok("No Menu Item Found");
+                return Ok(list);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("id/{id}")]
         public IActionResult GetMenuById(int id)
         {
-            var item = _blMenuItem.GetMenuItemById(id);
-            if (item is null) return Ok("No Menu Item Found.");
-            return Ok(item);
+            try
+            {
+                var item = _blMenuItem.GetMenuItemById(id);
+                if (item is null) return Ok("No Menu Item Found.");
+                return Ok(item);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateMenuItem(int id, MenuItemModel menuItem)
+        public IActionResult UpdateMenuItem(int id, MenuItemRequest menuItem)
         {
-            var menu = _blMenuItem.GetMenuItemById(id);
-            if (menu is null) return Ok("Np Data Found");
+            try
+            {
+                var menu = _blMenuItem.GetMenuItemById(id);
+                if (menu is null) return Ok("No Data Found");
 
-            var result = _blMenuItem.UpdateMenuItem(id,menuItem);
-            string message = result > 0 ? "Updating Successful!" : "Updating Failed!";
-            return Ok(message);
+                var result = _blMenuItem.UpdateMenuItem(id, menuItem);
+                string message = result > 0 ? "Updating Successful!" : "Updating Failed!";
+                return Ok(message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteMenuItem(int id)
         {
-            var result= _blMenuItem.DeleteMenuItem(id);
-            string message = result > 0 ? "Deleting Successful!" : "Deleting Failed!";
-            return Ok(message);
+            try
+            {
+                var result = _blMenuItem.DeleteMenuItem(id);
+                string message = result > 0 ? "Deleting Successful!" : "Deleting Failed!";
+                return Ok(message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpGet("{categoryCode}")]
+        [HttpGet("CategoryCode/{categoryCode}")]
         public IActionResult GetMenuItemsByCategoryCode(string categoryCode)
         {
-            var menulst = _blMenuItem.GetMenuItemsByCategoryCode(categoryCode);
-            if (menulst.Count == 0) return Ok("No menu found.");
-            return Ok(menulst);
+            try
+            {
+                var menulst = _blMenuItem.GetMenuItemsByCategoryCode(categoryCode);
+                if (menulst.Count == 0) return Ok("No menu found.");
+                return Ok(menulst);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
     }

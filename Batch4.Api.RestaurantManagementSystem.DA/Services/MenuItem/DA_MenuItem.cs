@@ -47,6 +47,7 @@ namespace Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem
             int result = _db.SaveChanges();
             return result;
         }
+
         public int DeleteMenuItem(int id)
         {
             MenuItemModel item = this.GetMenuItemById(id); ;
@@ -56,6 +57,12 @@ namespace Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem
 
             int result = _db.SaveChanges();
             return result;
+        }
+
+        public MenuItemModel FindByName(string name)
+        {
+            MenuItemModel item = _db.MenuItem.FirstOrDefault(x => x.ItemName == name);
+            return item;
         }
     }
 }
