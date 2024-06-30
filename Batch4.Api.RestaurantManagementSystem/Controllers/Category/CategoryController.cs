@@ -67,6 +67,7 @@ namespace Batch4.Api.RestaurantManagementSystem.Controllers.Category
             try
             {
                 var item = _blCategory.GetCategoryByCode(code);
+                if(item is null) return Ok("No Category Found.");
                 return Ok(item);
             }
             catch (Exception e)
@@ -76,7 +77,7 @@ namespace Batch4.Api.RestaurantManagementSystem.Controllers.Category
         }
 
         [HttpPut("{code}")]
-        public IActionResult Update(string code, CategoryModel category)
+        public IActionResult Update(string code, CategoryRequest category)
         {
             try
             {

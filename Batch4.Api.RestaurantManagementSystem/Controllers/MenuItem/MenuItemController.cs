@@ -41,6 +41,7 @@ namespace Batch4.Api.RestaurantManagementSystem.Controllers.MenuItem
         public IActionResult GetMenuById(int id)
         {
             var item = _blMenuItem.GetMenuItemById(id);
+            if (item is null) return Ok("No Menu Item Found.");
             return Ok(item);
         }
 
@@ -61,6 +62,14 @@ namespace Batch4.Api.RestaurantManagementSystem.Controllers.MenuItem
             var result= _blMenuItem.DeleteMenuItem(id);
             string message = result > 0 ? "Deleting Successful!" : "Deleting Failed!";
             return Ok(message);
+        }
+
+        [HttpGet("{categoryCode}")]
+        public IActionResult GetMenuItemsByCategoryCode(string categoryCode)
+        {
+            var menulst = _blMenuItem.GetMenuItemsByCategoryCode(categoryCode);
+            if (menulst.Count == 0) return Ok("No menu found.");
+            return Ok(menulst);
         }
 
     }

@@ -13,7 +13,7 @@ public  record CategoryRequest(string categoryName)
     {
         return new CategoryModel
         {
-            CategoryName = categoryName,
+            CategoryName = categoryName.Trim().ToUpper(),
             CategoryCode = this.GenerateCode(categoryName)
         };
     }

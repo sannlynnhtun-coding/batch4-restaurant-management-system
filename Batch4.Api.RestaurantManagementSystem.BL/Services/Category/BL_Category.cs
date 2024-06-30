@@ -40,9 +40,9 @@ public class BL_Category
             return category;
         }
 
-    public int UpdateCategory(string code,  CategoryModel category)
+    public int UpdateCategory(string code,  CategoryRequest category)
     {
-        var result = _daCategory.UpdateCategory(code, category);
+        var result = _daCategory.UpdateCategory(code, category.Change());
         return result;
     }
 

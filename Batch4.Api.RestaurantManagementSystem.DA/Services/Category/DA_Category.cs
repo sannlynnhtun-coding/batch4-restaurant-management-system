@@ -49,7 +49,7 @@ public class DA_Category
         CategoryModel item = this.GetCategoryByCode(categoryCode);
         if (item == null) throw new InvalidDataException("no data found");
 
-        item.CategoryName = category.CategoryName.Trim().ToUpper();
+        item.CategoryName = category.CategoryName;
         item.CategoryCode = category.CategoryCode;
 
         int result = _db.SaveChanges();

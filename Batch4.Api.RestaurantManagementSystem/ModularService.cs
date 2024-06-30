@@ -1,8 +1,6 @@
 ﻿using Batch4.Api.RestaurantManagementSystem.BL.Services.Category;
 using Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem;
 using Batch4.Api.RestaurantManagementSystem.BL.Services.Order;
-using Batch4.Api.RestaurantManagementSystem.DA;
-using Batch4.Api.RestaurantManagementSystem.DA.Db;
 using Batch4.Api.RestaurantManagementSystem.DA.Services.Category;
 using Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
 using Batch4.Api.RestaurantManagementSystem.DA.Services.Order;
