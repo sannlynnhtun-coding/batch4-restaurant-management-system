@@ -1,10 +1,5 @@
 ﻿using Batch4.Api.RestaurantManagementSystem.DA.Models;
 using Batch4.Api.RestaurantManagementSystem.DA.Services.Category;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Category
 {
@@ -38,7 +33,6 @@ namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Category
         public CategoryModel GetCategoryByCode(string code)
         {
             var category = _daCategory.GetCategoryByCode(code);
-            if (category == null) throw new InvalidDataException("no data found");
             return category;
         }
 

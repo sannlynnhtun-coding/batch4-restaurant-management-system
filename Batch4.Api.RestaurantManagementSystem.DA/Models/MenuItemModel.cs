@@ -14,7 +14,6 @@ namespace Batch4.Api.RestaurantManagementSystem.DA.Models
         [Key]
         public int ItemId { get; set; }    
         public string ItemName { get; set; }
-            
         public double ItemPrice { get; set; }
         public string CategoryCode { get; set; }
 
