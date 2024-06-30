@@ -1,4 +1,5 @@
-﻿using Batch4.Api.RestaurantManagementSystem.BL.Services.Category;
+﻿using Batch4.Api.RestaurantManagementSystem.BL.RequestModels;
+using Batch4.Api.RestaurantManagementSystem.BL.Services.Category;
 using Batch4.Api.RestaurantManagementSystem.DA.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace Batch4.Api.RestaurantManagementSystem.Controllers.Category
         }
 
         [HttpPost]
-        public IActionResult Create(CategoryModel category)
+        public IActionResult Create(CategoryRequest category)
         {
             try
             {
