@@ -6,18 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Batch4.Api.RestaurantManagementSystem.DA.Db
+namespace Batch4.Api.RestaurantManagementSystem.DA.Db;
+
+public class AppDbContext:DbContext
 {
-    public class AppDbContext:DbContext
+    public AppDbContext(DbContextOptions options) : base(options)
     {
-        public AppDbContext(DbContextOptions options) : base(options)
-        {
-        }
-
-        public DbSet<CategoryModel> Categories { get; set; }
-        public DbSet<MenuItemModel> MenuItem { get; set; }
-        public DbSet<OrderModel> Orders { get; set; }
-        public DbSet<OrderDetailModel> OrderDetails { get; set; }
-
     }
+
+    public DbSet<CategoryModel> Categories { get; set; }
+    public DbSet<MenuItemModel> MenuItem { get; set; }
+    public DbSet<OrderModel> Orders { get; set; }
+    public DbSet<OrderDetailModel> OrderDetails { get; set; }
+
 }
