@@ -69,5 +69,11 @@ namespace Batch4.Api.RestaurantManagementSystem.DA.Services.Order
             model.Items = orderDetail;
             return model;
         }
+
+        public async Task<List<OrderModel>> ViewOrders()
+        {
+            List<OrderModel> list = await _db.Orders.ToListAsync();
+            return list;
+        }
     }
 }

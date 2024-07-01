@@ -1,6 +1,7 @@
 ﻿using Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
 using Batch4.Api.RestaurantManagementSystem.DA.Services.Order;
 using Batch4.Api.RestaurantManagementSystem.DA.ResponseModel;
+using Batch4.Api.RestaurantManagementSystem.DA.Models;
 
 namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Order
 {
@@ -23,6 +24,11 @@ namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Order
         {
             var model = await _daOrder.ViewOrder(invoiceNo);
             return model;
+        }
+
+        public async Task<List<OrderModel>> ViewOrders()
+        {
+            return await _daOrder.ViewOrders();
         }
     }
 }

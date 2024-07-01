@@ -31,5 +31,12 @@ namespace Batch4.Api.RestaurantManagementSystem.Controllers.Order
             if (model.InvoiceNo == null) return Ok("No order found.");
             return Ok(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ViewOrders()
+        {
+            var model = await _blOrder.ViewOrders();
+            return Ok(model);
+        }
     }
 }
