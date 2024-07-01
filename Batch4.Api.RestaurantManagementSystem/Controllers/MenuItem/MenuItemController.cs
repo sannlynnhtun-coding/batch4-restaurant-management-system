@@ -20,16 +20,16 @@ public class MenuItemController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create(MenuItemRequest menuItem)
+    public async Task<IActionResult> Create(MenuItemRequest menuItem)
     {
         try
         {
-            var category = _blCategory.GetCategoryByCode(menuItem.categoryCode);
-            if (category is null) return Ok("Invalid Category.");
+        var category = _blCategory.GetCategoryByCode(menuItem.categoryCode);
+        if (category is null) return Ok("Invalid Category.");
 
-            var result = _blMenuItem.CreateMenuItem(menuItem);
-            string message = result > 0 ? "New MenuItem Creation Successful" : "New MenuItem Creation Fail";
-            return Ok(message);
+        var result = await _blMenuItem.CreateMenuItem(menuItem);
+        string message = result > 0 ? "New MenuItem Creation Successful" : "New MenuItem Creation Fail";
+        return Ok(message);
         }
         catch (Exception e)
         {
@@ -38,11 +38,11 @@ public class MenuItemController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetItem()
+    public async Task<IActionResult> GetItem()
     {
         try
         {
-            var list = _blMenuItem.GetAllMenuItem();
+            var list = await _blMenuItem.GetAllMenuItem();
             if (list.Count == 0) return Ok("No Menu Item Found");
             return Ok(list);
         }
@@ -53,11 +53,11 @@ public class MenuItemController : ControllerBase
     }
 
     [HttpGet("id/{id}")]
-    public IActionResult GetMenuById(int id)
+    public async Task<IActionResult> GetMenuById(int id)
     {
         try
         {
-            var item = _blMenuItem.GetMenuItemById(id);
+            var item = await _blMenuItem.GetMenuItemById(id);
             if (item is null) return Ok("No Menu Item Found.");
             return Ok(item);
         }
@@ -68,14 +68,14 @@ public class MenuItemController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult UpdateMenuItem(int id, MenuItemRequest menuItem)
+    public async Task<IActionResult> UpdateMenuItem(int id, MenuItemRequest menuItem)
     {
         try
         {
-            var menu = _blMenuItem.GetMenuItemById(id);
+            var menu = await _blMenuItem.GetMenuItemById(id);
             if (menu is null) return Ok("No Data Found");
 
-            var result = _blMenuItem.UpdateMenuItem(id, menuItem);
+            var result = await _blMenuItem.UpdateMenuItem(id, menuItem);
             string message = result > 0 ? "Updating Successful!" : "Updating Failed!";
             return Ok(message);
         }
@@ -86,11 +86,11 @@ public class MenuItemController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteMenuItem(int id)
+    public async Task<IActionResult> DeleteMenuItem(int id)
     {
         try
         {
-            var result = _blMenuItem.DeleteMenuItem(id);
+            var result = await _blMenuItem.DeleteMenuItem(id);
             string message = result > 0 ? "Deleting Successful!" : "Deleting Failed!";
             return Ok(message);
         }
@@ -101,11 +101,11 @@ public class MenuItemController : ControllerBase
     }
 
     [HttpGet("CategoryCode/{categoryCode}")]
-    public IActionResult GetMenuItemsByCategoryCode(string categoryCode)
+    public async Task<IActionResult> GetMenuItemsByCategoryCode(string categoryCode)
     {
         try
         {
-            var menulst = _blMenuItem.GetMenuItemsByCategoryCode(categoryCode);
+            var menulst = await _blMenuItem.GetMenuItemsByCategoryCode(categoryCode);
             if (menulst.Count == 0) return Ok("No menu found.");
             return Ok(menulst);
         }
