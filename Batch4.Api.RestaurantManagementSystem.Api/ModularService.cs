@@ -1,4 +1,4 @@
-﻿namespace Batch4.Api.RestaurantManagementSystem;
+﻿namespace Batch4.Api.RestaurantManagementSystem.Api;
 
 public static class ModularService
 {

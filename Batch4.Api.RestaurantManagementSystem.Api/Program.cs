@@ -1,4 +1,4 @@
-using Batch4.Api.RestaurantManagementSystem.Shared.DapperService;
+using Batch4.Api.RestaurantManagementSystem.Api.Shared.DapperService;
 
 var builder = WebApplication.CreateBuilder(args);
 

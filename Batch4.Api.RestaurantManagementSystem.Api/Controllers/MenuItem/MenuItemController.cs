@@ -1,4 +1,4 @@
-﻿namespace Batch4.Api.RestaurantManagementSystem.Controllers.MenuItem;
+﻿namespace Batch4.Api.RestaurantManagementSystem.Api.Controllers.MenuItem;
 
 [Route("api/[controller]")]
 [ApiController]
