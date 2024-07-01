@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35017.193
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Batch4.Api.RestaurantManagementSystem", "Batch4.Api.RestaurantManagementSystem\Batch4.Api.RestaurantManagementSystem.csproj", "{21600986-8E6C-4A6F-9C0F-183E02E117E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Batch4.Api.RestaurantManagementSystem.Api", "Batch4.Api.RestaurantManagementSystem.Api\Batch4.Api.RestaurantManagementSystem.Api.csproj", "{21600986-8E6C-4A6F-9C0F-183E02E117E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Batch4.Api.RestaurantManagementSystem.BL", "Batch4.Api.RestaurantManagementSystem.BL\Batch4.Api.RestaurantManagementSystem.BL.csproj", "{9185683B-C042-4B57-B329-68D1B0B18E3A}"
 EndProject

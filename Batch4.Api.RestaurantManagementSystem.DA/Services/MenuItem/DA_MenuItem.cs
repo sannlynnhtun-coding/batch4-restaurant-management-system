@@ -1,8 +1,4 @@
-﻿using Batch4.Api.RestaurantManagementSystem.DA.Db;
-using Batch4.Api.RestaurantManagementSystem.DA.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
+﻿namespace Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
 
 public class DA_MenuItem
 {

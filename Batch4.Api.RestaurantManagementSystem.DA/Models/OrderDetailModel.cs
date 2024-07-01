@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace Batch4.Api.RestaurantManagementSystem.DA.Models;
+﻿namespace Batch4.Api.RestaurantManagementSystem.DA.Models;
 
 [Table("Tbl_OrderDetail")]
 public class OrderDetailModel

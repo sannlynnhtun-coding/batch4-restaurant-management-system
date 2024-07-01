@@ -1,5 +1,4 @@
-﻿using System;
-namespace Batch4.Api.RestaurantManagementSystem.DA.ResponseModel;
+﻿namespace Batch4.Api.RestaurantManagementSystem.DA.ResponseModel;
 
 public class OrderRequest
 {
