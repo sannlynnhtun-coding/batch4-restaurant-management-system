@@ -1,11 +1,4 @@
-﻿using Batch4.Api.RestaurantManagementSystem.DA.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Batch4.Api.RestaurantManagementSystem.BL.RequestModels;
+﻿namespace Batch4.Api.RestaurantManagementSystem.BL.RequestModels;
 
 public  record CategoryRequest(string categoryName)
 {

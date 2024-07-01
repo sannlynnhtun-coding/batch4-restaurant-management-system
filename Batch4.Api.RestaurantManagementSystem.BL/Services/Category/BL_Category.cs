@@ -1,8 +1,4 @@
-﻿using Batch4.Api.RestaurantManagementSystem.BL.RequestModels;
-using Batch4.Api.RestaurantManagementSystem.DA.Models;
-using Batch4.Api.RestaurantManagementSystem.DA.Services.Category;
-
-namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Category;
+﻿namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Category;
 
 public class BL_Category
 {

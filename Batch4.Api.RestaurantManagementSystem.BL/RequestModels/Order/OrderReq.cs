@@ -1,12 +1,4 @@
-﻿using Batch4.Api.RestaurantManagementSystem.DA.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Quic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Batch4.Api.RestaurantManagementSystem.BL.RequestModels.Order;
+﻿namespace Batch4.Api.RestaurantManagementSystem.BL.RequestModels.Order;
 
 public class OrderReq
 {

@@ -1,10 +1,4 @@
-﻿using Batch4.Api.RestaurantManagementSystem.BL.RequestModels.Order;
-using Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem;
-using Batch4.Api.RestaurantManagementSystem.BL.Services.Order;
-using Batch4.Api.RestaurantManagementSystem.DA.ResponseModel;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Batch4.Api.RestaurantManagementSystem.Controllers.Order;
+﻿namespace Batch4.Api.RestaurantManagementSystem.Controllers.Order;
 
 [Route("api/[controller]")]
 [ApiController]

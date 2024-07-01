@@ -1,8 +1,4 @@
-﻿using Batch4.Api.RestaurantManagementSystem.BL.RequestModels;
-using Batch4.Api.RestaurantManagementSystem.DA.Models;
-using Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
-
-namespace Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem;
+﻿namespace Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem;
 
 public class BL_MenuItem
 {

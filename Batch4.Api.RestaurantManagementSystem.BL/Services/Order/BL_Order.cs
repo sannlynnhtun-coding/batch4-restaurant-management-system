@@ -1,11 +1,4 @@
-﻿using Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
-using Batch4.Api.RestaurantManagementSystem.DA.Services.Order;
-using Batch4.Api.RestaurantManagementSystem.DA.ResponseModel;
-using Batch4.Api.RestaurantManagementSystem.DA.Models;
-using Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem;
-using Batch4.Api.RestaurantManagementSystem.BL.RequestModels.Order;
-
-namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Order;
+﻿namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Order;
 
 public class BL_Order
 {
