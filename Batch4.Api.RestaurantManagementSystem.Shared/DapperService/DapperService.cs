@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Batch4.Api.RestaurantManagementSystem.DA.Dapper;
+namespace Batch4.Api.RestaurantManagementSystem.Shared.DapperService;
 
 public class DapperService
 {
