@@ -1,5 +1,6 @@
 ﻿using Batch4.Api.RestaurantManagementSystem.DA.Db;
 using Batch4.Api.RestaurantManagementSystem.DA.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
 
@@ -12,50 +13,50 @@ public class DA_MenuItem
         _db = db;
     }
 
-    public int CreateMenuItem(MenuItemModel menuItem)
+    public async  Task<int> CreateMenuItem(MenuItemModel menuItem)
     {
         _db.MenuItem.Add(menuItem);
-        int result = _db.SaveChanges();
+        int result = await _db.SaveChangesAsync();
         return result;
     }
 
-    public List<MenuItemModel> GetAllMenuItem()
+    public async Task<List<MenuItemModel>> GetAllMenuItem()
     {
-        List<MenuItemModel> list = _db.MenuItem.ToList();
+        List<MenuItemModel> list = await _db.MenuItem.ToListAsync();
         return list;
     }
 
-    public MenuItemModel GetMenuItemById(int id)
+    public async Task<MenuItemModel> GetMenuItemById(int id)
     {
-        MenuItemModel item = _db.MenuItem.FirstOrDefault(x => x.ItemId == id)!;
+        MenuItemModel item = await _db.MenuItem.FirstOrDefaultAsync(x => x.ItemId == id)!;
         return item;
     }
 
-    public List<MenuItemModel> GetMenuItemByCategoryCode(string categoryCode)
+    public async Task<List<MenuItemModel>> GetMenuItemByCategoryCode(string categoryCode)
     {
-        var lst = _db.MenuItem.Where(x=>x.CategoryCode==categoryCode).ToList();
+        var lst = await _db.MenuItem.Where(x=>x.CategoryCode==categoryCode).ToListAsync();
         return lst;
     }
 
-    public int UpdateMenuItem(int id,MenuItemModel menuModel)
+    public async Task<int> UpdateMenuItem(int id,MenuItemModel menuModel)
     {
-        MenuItemModel item = GetMenuItemById(id);
+        MenuItemModel item = await GetMenuItemById(id);
         item.ItemName = menuModel.ItemName;
         item.ItemPrice = menuModel.ItemPrice;
         item.CategoryCode = menuModel.CategoryCode;
 
-        int result = _db.SaveChanges();
+        int result = await _db.SaveChangesAsync();
         return result;
     }
 
-    public int DeleteMenuItem(int id)
+    public async Task<int> DeleteMenuItem(int id)
     {
-        MenuItemModel item = this.GetMenuItemById(id); ;
+        MenuItemModel item = await this.GetMenuItemById(id); ;
         if (item == null) throw new InvalidDataException("No data found");
 
         _db.MenuItem.Remove(item);
 
-        int result = _db.SaveChanges();
+        int result = await _db.SaveChangesAsync();
         return result;
     }
 

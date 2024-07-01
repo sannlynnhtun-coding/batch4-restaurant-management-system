@@ -19,51 +19,39 @@ public class DA_Category
         _db = db;
     }
 
-    public int CreateCategory(CategoryModel category)
+    public async Task<int> CreateCategory(CategoryModel category)
     {
         _db.Categories.Add(category);
-        int result = _db.SaveChanges();
+        int result = await _db.SaveChangesAsync();
         return result;
     }
 
-    public List<CategoryModel> GetAllCategories()
+    public async Task<List<CategoryModel>> GetAllCategories()
     {
-        List<CategoryModel> list = _db.Categories.ToList();
+        List<CategoryModel> list = await _db.Categories.ToListAsync();
         return list;
     }
 
-    public CategoryModel GetCategoryById(int id)
+    public async Task<CategoryModel> GetCategoryById(int id)
     {
-        CategoryModel category = _db.Categories.FirstOrDefault(x => x.CategoryId ==  id);
+        CategoryModel category = await _db.Categories.FirstOrDefaultAsync(x => x.CategoryId ==  id);
         return category;
     }
 
-    public CategoryModel GetCategoryByCode(string code)
+    public async Task<CategoryModel> GetCategoryByCode(string code)
     {
-        CategoryModel category = _db.Categories.FirstOrDefault(x => x.CategoryCode == code);
+        CategoryModel category = await _db.Categories.FirstOrDefaultAsync(x => x.CategoryCode == code);
         return category;
     }
 
-    //public int UpdateCategory(string categoryCode,  CategoryModel category)
-    //{
-    //    CategoryModel item = this.GetCategoryByCode(categoryCode);
-    //    if (item == null) throw new InvalidDataException("no data found");
-
-    //    item.CategoryName = category.CategoryName;
-    //    item.CategoryCode = category.CategoryCode;
-
-    //    int result = _db.SaveChanges();
-    //    return result;
-    //}
-
-    public int DeleteCategory(string categoryCode)
+    public async Task<int> DeleteCategory(string categoryCode)
     {
-        CategoryModel category = this.GetCategoryByCode(categoryCode);
+        CategoryModel category = await this.GetCategoryByCode(categoryCode);
         if (category == null) throw new InvalidDataException("no data found");
 
         _db.Categories.Remove(category);
 
-        int result = _db.SaveChanges();
+        int result = await _db.SaveChangesAsync();
         return result;
     }
 

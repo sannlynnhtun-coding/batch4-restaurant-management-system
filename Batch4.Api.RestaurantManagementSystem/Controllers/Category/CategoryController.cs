@@ -3,108 +3,91 @@ using Batch4.Api.RestaurantManagementSystem.BL.Services.Category;
 using Batch4.Api.RestaurantManagementSystem.DA.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Batch4.Api.RestaurantManagementSystem.Controllers.Category
+namespace Batch4.Api.RestaurantManagementSystem.Controllers.Category;
+
+[Route("api/[controller]")]
+[ApiController]
+public class CategoryController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CategoryController : ControllerBase
+    private readonly BL_Category _blCategory;
+
+    public CategoryController(BL_Category blCategory)
     {
-        private readonly BL_Category _blCategory;
+        _blCategory = blCategory;
+    }
 
-        public CategoryController(BL_Category blCategory)
+    [HttpPost]
+    public async Task<IActionResult> Create(CategoryRequest category)
+    {
+        try
         {
-            _blCategory = blCategory;
+            var result = await _blCategory.CreateCategory(category);
+            string message = result > 0 ? "New category Creation Successful" : "New category Creation Fail";
+            return Ok(message);
         }
-
-        [HttpPost]
-        public IActionResult Create(CategoryRequest category)
+        catch (Exception e)
         {
-            try
-            {
-                var result = _blCategory.CreateCategory(category);
-                string message = result > 0 ? "New category Creation Successful" : "New category Creation Fail";
-                return Ok(message);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            return BadRequest(e.Message);
         }
+    }
 
-        [HttpGet]
-        public IActionResult GetAll()
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        try
         {
-            try
-            {
-                var list = _blCategory.GetAllCategories();
-                return Ok(list);
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(e.Message);
-            }
+            var list = await _blCategory.GetAllCategories();
+            return Ok(list);
         }
-
-        [HttpGet("id/{id}")]
-        public IActionResult GetById(int id)
+        catch (Exception e)
         {
-            try
-            {
-                var item = _blCategory.GetCategoryById(id);
-                return Ok(item);
-            }
-            catch (Exception e)
-            {
 
-                return BadRequest(e.Message);
-            }
+            return BadRequest(e.Message);
         }
+    }
 
-        [HttpGet("code/{code}")]
-        public IActionResult GetByCode(string code)
+    [HttpGet("id/{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        try
         {
-            try
-            {
-                var item = _blCategory.GetCategoryByCode(code);
-                if(item is null) return Ok("No Category Found.");
-                return Ok(item);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var item = await _blCategory.GetCategoryById(id);
+            return Ok(item);
         }
-
-        //[HttpPut("{code}")]
-        //public IActionResult Update(string code, CategoryRequest category)
-        //{
-        //    try
-        //    {
-        //        var result = _blCategory.UpdateCategory(code, category);
-        //        string message = result > 0 ? "Updated Successful" : "Failed update!";
-        //        return Ok(message);
-        //    }
-        //    catch (Exception e)
-        //    {
-
-        //        return BadRequest(e.Message);
-        //    }
-        //}
-
-        [HttpDelete("{code}")]
-        public IActionResult Delete(string code) 
+        catch (Exception e)
         {
-            try
-            {
-                var result = _blCategory.DeleteCategory(code);
-                string message = result > 0 ? "Deleted Successful" : "Failed delete!";
-                return Ok(message);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet("code/{code}")]
+    public async Task<IActionResult> GetByCode(string code)
+    {
+        try
+        {
+            var item = await _blCategory.GetCategoryByCode(code);
+            if(item is null) return Ok("No Category Found.");
+            return Ok(item);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpDelete("{code}")]
+    public async Task<IActionResult> Delete(string code) 
+    {
+        try
+        {
+            var result = await _blCategory.DeleteCategory(code);
+            string message = result > 0 ? "Deleted Successful" : "Failed delete!";
+            return Ok(message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
         }
     }
 }
