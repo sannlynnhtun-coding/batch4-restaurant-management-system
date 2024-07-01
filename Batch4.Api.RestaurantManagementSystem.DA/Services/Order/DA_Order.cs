@@ -1,8 +1,8 @@
-﻿using Batch4.Api.RestaurantManagementSystem.DA.Dapper;
-using Batch4.Api.RestaurantManagementSystem.DA.Db;
+﻿using Batch4.Api.RestaurantManagementSystem.DA.Db;
 using Batch4.Api.RestaurantManagementSystem.DA.Models;
 using Batch4.Api.RestaurantManagementSystem.DA.Queries;
 using Batch4.Api.RestaurantManagementSystem.DA.ResponseModel;
+using Batch4.Api.RestaurantManagementSystem.Shared.DapperService;
 using Microsoft.EntityFrameworkCore;
 
 namespace Batch4.Api.RestaurantManagementSystem.DA.Services.Order;

@@ -6,7 +6,6 @@ global using Batch4.Api.RestaurantManagementSystem.BL.RequestModels.Order;
 global using Batch4.Api.RestaurantManagementSystem.BL.Services.Category;
 global using Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem;
 global using Batch4.Api.RestaurantManagementSystem.BL.Services.Order;
-global using Batch4.Api.RestaurantManagementSystem.DA.Dapper;
 global using Batch4.Api.RestaurantManagementSystem.DA.Db;
 global using Batch4.Api.RestaurantManagementSystem.DA.Models;
 global using Batch4.Api.RestaurantManagementSystem.DA.ResponseModel;

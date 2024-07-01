@@ -1,3 +1,5 @@
+using Batch4.Api.RestaurantManagementSystem.Shared.DapperService;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
