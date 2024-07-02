@@ -12,7 +12,7 @@ public class DA_Category
         _db = db;
     }
 
-    public async Task<int> CreateCategory(CategoryRequest reqModel)
+    public async Task<int> CreateCategory(CategoryRequestModel reqModel)
     {
         if (reqModel.CategoryName.IsNullOrEmpty()) return 0;
         CategoryModel category = new CategoryModel()
