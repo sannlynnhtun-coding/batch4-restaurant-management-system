@@ -5,25 +5,20 @@
 public class MenuItemController : ControllerBase
 {
     private readonly BL_MenuItem _blMenuItem;
-    private readonly BL_Category _blCategory;
 
-    public MenuItemController(BL_MenuItem blMenuItem,BL_Category blCategory)
+    public MenuItemController(BL_MenuItem blMenuItem)
     {
         _blMenuItem = blMenuItem;
-        _blCategory = blCategory;
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(MenuItemRequest menuItem)
+    public async Task<IActionResult> Create(MenuItemRequestModel menuItem)
     {
         try
         {
-        var category = _blCategory.GetCategoryByCode(menuItem.categoryCode);
-        if (category is null) return Ok("Invalid Category.");
-
-        var result = await _blMenuItem.CreateMenuItem(menuItem);
-        string message = result > 0 ? "New MenuItem Creation Successful" : "New MenuItem Creation Fail";
-        return Ok(message);
+            var result = await _blMenuItem.CreateMenuItem(menuItem);
+            string message = result > 0 ? "New MenuItem Creation Successful" : "New MenuItem Creation Fail";
+            return Ok(message);
         }
         catch (Exception e)
         {
@@ -62,7 +57,7 @@ public class MenuItemController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateMenuItem(int id, MenuItemRequest menuItem)
+    public async Task<IActionResult> UpdateMenuItem(int id, MenuItemRequestModel menuItem)
     {
         try
         {

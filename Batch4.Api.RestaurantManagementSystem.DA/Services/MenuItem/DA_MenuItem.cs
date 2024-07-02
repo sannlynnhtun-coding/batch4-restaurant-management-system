@@ -1,17 +1,28 @@
-﻿namespace Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
+﻿using Batch4.Api.RestaurantManagementSystem.DA.Services.Category;
+
+namespace Batch4.Api.RestaurantManagementSystem.DA.Services.MenuItem;
 
 public class DA_MenuItem
 {
     private readonly AppDbContext _db;
+    private readonly DA_Category _daCategory;
 
-    public DA_MenuItem(AppDbContext db)
+    public DA_MenuItem(AppDbContext db,
+        DA_Category daCategory)
     {
         _db = db;
+        _daCategory = daCategory;
     }
 
-    public async  Task<int> CreateMenuItem(MenuItemModel menuItem)
+    public async Task<int> CreateMenuItem(MenuItemRequestModel reqModel)
     {
-        _db.MenuItem.Add(menuItem);
+        MenuItemModel menu = new MenuItemModel()
+        {
+            ItemName = reqModel.ItemName,
+            ItemPrice = reqModel.ItemPrice,
+            CategoryCode = reqModel.CategoryCode
+        };
+        _db.MenuItem.Add(menu);
         int result = await _db.SaveChangesAsync();
         return result;
     }
@@ -30,16 +41,18 @@ public class DA_MenuItem
 
     public async Task<List<MenuItemModel>> GetMenuItemByCategoryCode(string categoryCode)
     {
-        var lst = await _db.MenuItem.Where(x=>x.CategoryCode==categoryCode).ToListAsync();
+        var lst = await _db.MenuItem.Where(x => x.CategoryCode == categoryCode).ToListAsync();
         return lst;
     }
 
-    public async Task<int> UpdateMenuItem(int id,MenuItemModel menuModel)
+    public async Task<int> UpdateMenuItem(int id, MenuItemRequestModel reqModel)
     {
+        var category = await _daCategory.GetCategoryByCode(reqModel.CategoryCode);
+        if (category is null) return 0;
         MenuItemModel item = await GetMenuItemById(id);
-        item.ItemName = menuModel.ItemName;
-        item.ItemPrice = menuModel.ItemPrice;
-        item.CategoryCode = menuModel.CategoryCode;
+        item.ItemName = reqModel.ItemName;
+        item.ItemPrice = reqModel.ItemPrice;
+        item.CategoryCode = reqModel.CategoryCode;
 
         int result = await _db.SaveChangesAsync();
         return result;

@@ -35,15 +35,15 @@ public class BL_Category
         return category;
     }
 
-    public async Task<int> DeleteCategory(string code)
+    public async Task<int> DeleteCategory(int id)
     {
-        return await _daCategory.DeleteCategory(code);
+        return await _daCategory.DeleteCategory(id);
     }
 
     private bool IsExist(string name)
     {
         var Category = _daCategory.FindByName(name);
-        if(Category == null) return false;
+        if (Category == null) return false;
         return true;
     }
 }

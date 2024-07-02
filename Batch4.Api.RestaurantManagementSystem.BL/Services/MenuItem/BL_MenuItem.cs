@@ -1,19 +1,25 @@
-﻿namespace Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem;
+﻿using Batch4.Api.RestaurantManagementSystem.DA.Services.Category;
+using Batch4.Api.RestaurantManagementSystem.Shared;
+
+namespace Batch4.Api.RestaurantManagementSystem.BL.Services.MenuItem;
 
 public class BL_MenuItem
 {
     private readonly DA_MenuItem _daMenuItem;
+    private readonly DA_Category _daCategory;
 
-    public BL_MenuItem(DA_MenuItem daMenuItem)
+    public BL_MenuItem(DA_MenuItem daMenuItem, DA_Category daCategory)
     {
         _daMenuItem = daMenuItem;
+        _daCategory = daCategory;
     }
 
-    public async Task<int> CreateMenuItem(MenuItemRequest menuItem)
+    public async Task<int> CreateMenuItem(MenuItemRequestModel reqModel)
     {
-        if (isExist(menuItem.name)) throw new Exception("Already existed!");
-
-        var result = await _daMenuItem.CreateMenuItem(menuItem.Change());
+        var category = await _daCategory.GetCategoryByCode(reqModel.CategoryCode);
+        if (category is null) throw new Exception("Invalid Category");
+        if (isExist(reqModel.ItemName)) throw new Exception("Already existed!");
+        var result = await _daMenuItem.CreateMenuItem(reqModel);
         return result;
     }
 
@@ -34,11 +40,11 @@ public class BL_MenuItem
         return lst;
     }
 
-    public async Task<int> UpdateMenuItem(int id, MenuItemRequest menuModel)
+    public async Task<int> UpdateMenuItem(int id, MenuItemRequestModel menuModel)
     {
         //if (isExist(menuModel.name)) throw new Exception("Already existed!");
 
-        var item = await _daMenuItem.UpdateMenuItem(id, menuModel.Change());
+        var item = await _daMenuItem.UpdateMenuItem(id, menuModel);
         return item;
     }
 
