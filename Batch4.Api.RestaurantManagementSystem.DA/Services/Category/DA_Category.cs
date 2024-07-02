@@ -17,7 +17,7 @@ public class DA_Category
         if (reqModel.CategoryName.IsNullOrEmpty()) return 0;
         CategoryModel category = new CategoryModel()
         {
-            CategoryName = reqModel.CategoryName,
+            CategoryName = reqModel.CategoryName.Trim().ToUpper(),
             CategoryCode = GenerateCode(reqModel.CategoryName)
         };
         _db.Categories.Add(category);
