@@ -62,7 +62,7 @@ public class CategoryController : ControllerBase
         try
         {
             var item = await _blCategory.GetCategoryByCode(code);
-            if(item is null) return Ok("No Category Found.");
+            if (item is null) return Ok("No Category Found.");
             return Ok(item);
         }
         catch (Exception e)
@@ -71,12 +71,12 @@ public class CategoryController : ControllerBase
         }
     }
 
-    [HttpDelete("{code}")]
-    public async Task<IActionResult> Delete(string code) 
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
     {
         try
         {
-            var result = await _blCategory.DeleteCategory(code);
+            var result = await _blCategory.DeleteCategory(id);
             string message = result > 0 ? "Deleted Successful" : "Failed delete!";
             return Ok(message);
         }

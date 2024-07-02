@@ -43,9 +43,9 @@ public class DA_Category
         return category;
     }
 
-    public async Task<int> DeleteCategory(string categoryCode)
+    public async Task<int> DeleteCategory(int id)
     {
-        CategoryModel category = await this.GetCategoryByCode(categoryCode);
+        CategoryModel category = await GetCategoryById(id);
         if (category == null) throw new InvalidDataException("no data found");
 
         _db.Categories.Remove(category);

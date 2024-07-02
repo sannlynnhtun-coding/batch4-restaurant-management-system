@@ -16,13 +16,13 @@ public class OrderController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(OrderRequestModel orderRequest)
     {
-        var model =await _blOrder.CreateOrder(orderRequest);
-        if (model.InvoiceNo == null) return Ok("Order Creation Fail."); 
+        var model = await _blOrder.CreateOrder(orderRequest);
+        if (model.InvoiceNo == null) return Ok("Order Creation Fail.");
         return Ok(model);
     }
 
     [HttpGet("invoiceNo")]
-    public async Task<IActionResult> ViewOrder(string invoiceNo)
+    public async Task<IActionResult> OrderDetail(string invoiceNo)
     {
         var model = await _blOrder.ViewOrder(invoiceNo);
         if (model.InvoiceNo == null) return Ok("No order found.");
