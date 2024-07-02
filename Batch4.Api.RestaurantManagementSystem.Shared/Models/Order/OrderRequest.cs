@@ -1,4 +1,4 @@
-﻿namespace Batch4.Api.RestaurantManagementSystem.DA.ResponseModel;
+﻿namespace Batch4.Api.RestaurantManagementSystem.Shared;
 
 public class OrderRequest
 {

@@ -69,13 +69,4 @@ public class DA_Order
         List<OrderModel> list = await _db.Orders.ToListAsync();
         return list;
     }
-
-    public async Task<int> AddOrderList(OrderListModel model)
-    {
-        await _db.Orders.AddAsync(model.Order);
-        await _db.OrderDetails.AddRangeAsync(model.Details);
-
-        int result = await _db.SaveChangesAsync();
-        return result;
-    }
 }

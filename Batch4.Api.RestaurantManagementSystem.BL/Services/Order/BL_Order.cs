@@ -1,4 +1,6 @@
-﻿namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Order;
+﻿using Batch4.Api.RestaurantManagementSystem.Shared;
+
+namespace Batch4.Api.RestaurantManagementSystem.BL.Services.Order;
 
 public class BL_Order
 {
@@ -26,38 +28,5 @@ public class BL_Order
     public async Task<List<OrderModel>> ViewOrders()
     {
         return await _daOrder.ViewOrders();
-    }
-
-    public async Task<OrderResp> AddOrder(OrderReq orderReq)
-    {
-        OrderListModel OrderList = new OrderListModel();
-        OrderResp response = new OrderResp();
-
-        string invoiceNo = DateTime.Now.ToString("yyyMMddHHmmss");
-
-        foreach (var item in orderReq.orders)
-        {
-            var menu = await _blMenuItem.GetMenuItemById(item.itemId);
-            if (menu == null) throw new InvalidDataException("item not found on the menu!");
-
-            var totalPrice = menu.ItemPrice * item.qty;
-
-            var orderDetail = item.Change(invoiceNo, totalPrice);
-
-            OrderList.Details.Add(orderDetail);
-        }
-
-        var total = OrderList.Details.Sum(x => x.TotalPrice);
-
-        OrderList.Order = orderReq.Change(invoiceNo, total);
-        int result = await _daOrder.AddOrderList(OrderList);
-
-        if (result > 0)
-        {
-            response.InvoiceNo = OrderList.Order.InvoiceNo;
-            response.TotalPrice = OrderList.Order.TotalPrice;
-        }
-
-        return response;
     }
 }

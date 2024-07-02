@@ -33,20 +33,4 @@ public class OrderController : ControllerBase
         var model = await _blOrder.ViewOrders();
         return Ok(model);
     }
-
-    [HttpPost("addorder")]
-    public async Task<IActionResult> AddOrder(OrderReq order)
-    {
-        try
-        {
-            var model = await _blOrder.AddOrder(order);
-            if (model.InvoiceNo == null) return Ok("Order Creation Fail.");
-            return Ok(model);
-        }
-        catch (Exception e)
-        {
-           return BadRequest(e.Message);
-        }
-    }
-
 }

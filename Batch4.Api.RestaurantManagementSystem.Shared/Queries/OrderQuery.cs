@@ -1,4 +1,4 @@
-﻿namespace Batch4.Api.RestaurantManagementSystem.DA.Queries;
+﻿namespace Batch4.Api.RestaurantManagementSystem.Shared.Queries;
 
 public static class OrderQuery
 {

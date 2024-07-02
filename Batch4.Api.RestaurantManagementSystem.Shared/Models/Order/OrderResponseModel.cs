@@ -1,12 +1,12 @@
-﻿namespace Batch4.Api.RestaurantManagementSystem.BL.RequestModels.Order;
+﻿namespace Batch4.Api.RestaurantManagementSystem.Shared;
 
-public class OrderResp
+public class OrderResponseModel
 {
     public string? InvoiceNo { get; set; }
     public decimal TotalPrice { get; set; }
 }
 
-public class OrderDetailResp : OrderResp
+public class OrderDetailResponseModel : OrderResponseModel
 {
     public List<OrderItemDetailModel> Items { get; set; }
 }

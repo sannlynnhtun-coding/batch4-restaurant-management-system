@@ -11,9 +11,9 @@ public class BL_Category
 
     public async Task<int> CreateCategory(CategoryRequest category)
     {
-        if (this.IsExist(category.categoryName)) throw new Exception("Already Existed!");
+        if (this.IsExist(category.CategoryName)) throw new Exception("Already Existed!");
 
-        var result = await _daCategory.CreateCategory(category.Change());
+        var result = await _daCategory.CreateCategory(category);
         return result;
     }
 
