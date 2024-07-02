@@ -1,4 +1,7 @@
-﻿namespace Batch4.Api.RestaurantManagementSystem.DA.Services.Category;
+﻿using Batch4.Api.RestaurantManagementSystem.BL.RequestModels;
+using Microsoft.IdentityModel.Tokens;
+
+namespace Batch4.Api.RestaurantManagementSystem.DA.Services.Category;
 
 public class DA_Category
 {
@@ -9,8 +12,14 @@ public class DA_Category
         _db = db;
     }
 
-    public async Task<int> CreateCategory(CategoryModel category)
+    public async Task<int> CreateCategory(CategoryRequest reqModel)
     {
+        if (reqModel.CategoryName.IsNullOrEmpty()) return 0;
+        CategoryModel category = new CategoryModel()
+        {
+            CategoryName = reqModel.CategoryName,
+            CategoryCode = GenerateCode(reqModel.CategoryName)
+        };
         _db.Categories.Add(category);
         int result = await _db.SaveChangesAsync();
         return result;
@@ -24,13 +33,13 @@ public class DA_Category
 
     public async Task<CategoryModel> GetCategoryById(int id)
     {
-        CategoryModel category = await _db.Categories.FirstOrDefaultAsync(x => x.CategoryId ==  id);
+        CategoryModel? category = await _db.Categories.FirstOrDefaultAsync(x => x.CategoryId ==  id);
         return category;
     }
 
     public async Task<CategoryModel> GetCategoryByCode(string code)
     {
-        CategoryModel category = await _db.Categories.FirstOrDefaultAsync(x => x.CategoryCode == code);
+        CategoryModel? category = await _db.Categories.FirstOrDefaultAsync(x => x.CategoryCode == code);
         return category;
     }
 
@@ -49,5 +58,15 @@ public class DA_Category
     {
         CategoryModel category = _db.Categories.FirstOrDefault(x => x.CategoryName == name);
         return category;
+    }
+
+    private string GenerateCode(string name)
+    {
+        string prefix = name.Trim().Substring(0, 3).ToUpper();
+
+        Random rdn = new Random();
+        string code = prefix + rdn.Next(100, 999).ToString();
+
+        return code;
     }
 }
