@@ -12,7 +12,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CategoryRequest category)
+    public async Task<IActionResult> Create(CategoryRequestModel category)
     {
         try
         {

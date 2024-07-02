@@ -9,7 +9,7 @@ public class BL_Category
         _daCategory = daCategory;
     }
 
-    public async Task<int> CreateCategory(CategoryRequest category)
+    public async Task<int> CreateCategory(CategoryRequestModel category)
     {
         if (this.IsExist(category.CategoryName)) throw new Exception("Already Existed!");
 

@@ -1,4 +1,7 @@
-﻿namespace Batch4.Api.RestaurantManagementSystem.DA.Services.Order;
+﻿using Batch4.Api.RestaurantManagementSystem.Shared;
+using Batch4.Api.RestaurantManagementSystem.Shared.Queries;
+
+namespace Batch4.Api.RestaurantManagementSystem.DA.Services.Order;
 
 public class DA_Order
 {
@@ -11,7 +14,7 @@ public class DA_Order
         _dapper = dapper;
     }
 
-    public async Task<OrderResponseModel> CreateOrder(OrderRequest orderRequest)
+    public async Task<OrderResponseModel> CreateOrder(OrderRequestModel orderRequest)
     {
         OrderResponseModel model = new OrderResponseModel();
         List<OrderDetailModel> orderDetailLst = new List<OrderDetailModel>();

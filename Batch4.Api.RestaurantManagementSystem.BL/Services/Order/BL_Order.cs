@@ -13,7 +13,7 @@ public class BL_Order
         _blMenuItem = blMenuItem;
     }
 
-    public async Task<OrderResponseModel> CreateOrder(OrderRequest orderRequest)
+    public async Task<OrderResponseModel> CreateOrder(OrderRequestModel orderRequest)
     {
         var model = await _daOrder.CreateOrder(orderRequest);
         return model;

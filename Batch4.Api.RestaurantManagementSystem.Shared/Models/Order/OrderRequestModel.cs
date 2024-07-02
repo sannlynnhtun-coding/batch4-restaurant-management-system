@@ -1,6 +1,6 @@
 ﻿namespace Batch4.Api.RestaurantManagementSystem.Shared;
 
-public class OrderRequest
+public class OrderRequestModel
 {
     public List<OrderItem> Items { get; set; }
 }
